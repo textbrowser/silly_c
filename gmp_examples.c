@@ -1,0 +1,67 @@
+#include <gmp.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+// gcc -Wall -Wextra -o gmp_examples gmp_examples.c -lgmp
+
+static void integer_example1(void)
+{
+  mpz_t m;
+  mpz_t n;
+  mpz_t pa;
+  mpz_t pm;
+
+  /*
+  ** Initialize some integers.
+  */
+
+  mpz_init(m);
+  mpz_init(n);
+  mpz_init(pa);
+  mpz_init(pm);
+
+  /*
+  ** Populate m and n with integer values.
+  */
+
+  mpz_init_set_str(m, "6625636191882319744229763658594058366038910357643317461765672591579969296901661631935982039603066802450004669458034481790335985438097059132571774730185443509045577946946432491707735977818009564073537790515936126449818017000040515035527113108613521081738238188606525295175140709495239612450420422240991275271622308767928315480897513681797664634190900745680770419690604821299222686002927332750068989000", 10);
+  mpz_init_set_str(n, "8162678964445624161376744579435671109551636243861797671705771033427225091482077673094086909331649118732439281741994739866728604813164319294333592785461714861767721078994932240088375449796713343659344478711621969940084106941402194553440996425729404726146305947041763723885657151299840691434493390404698819526505131659600372095286016375867842696084431010952447493133665417571511406067463510697540892603", 10);
+
+  /*
+  ** Some arithmetic.
+  */
+
+  mpz_add(pa, m, n); // pa = m + n
+  mpz_mul(pm, m, n); // pm = m * n
+
+  /*
+  ** Display results.
+  */
+
+  printf("m + n = ");
+  mpz_out_str(stdout, 10, pa);
+  printf("\n");
+  printf("m * n = ");
+  mpz_out_str(stdout, 10, pm);
+  printf("\n");
+
+  if(mpz_cmp(m, n) > 0)
+    printf("m is greater than n.\n");
+  else
+    printf("m is less than or equal to n.\n");
+
+  /*
+  ** Release resources.
+  */
+
+  mpz_clear(m);
+  mpz_clear(n);
+  mpz_clear(pa);
+  mpz_clear(pm);
+}
+
+int main(void)
+{
+  integer_example1();
+  return EXIT_SUCCESS;
+}
